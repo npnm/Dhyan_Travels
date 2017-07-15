@@ -1,0 +1,23 @@
+<div class="page-content">
+    <div class="cabsList">
+        <div class="cabs-repeat" *ngFor="let cab of cabObject">
+            <div class="cab-details">
+                <div class="cab-name">{{cab.Title}}</div>
+                <div class="cab-description">
+                    <div class="cab-img">
+                    </div>
+                    <div class="cab-desc">
+                        <p class="">{{cab.ShortDescription}}</p>
+                        <p class="nghf ngh-people">Seating Capacity : {{cab.Capacity}}</p>
+                    </div>
+                    <div class="cab-rate">
+                        <p class="nghf ngh-rs">Cost per km : {{cab.CostPerKilometer}}</p>
+                        <div class="button-request">
+                            <button (click)="SubmitRequest()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
