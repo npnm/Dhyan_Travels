@@ -12,7 +12,7 @@ var core_1 = require("@angular/core");
 var modals_1 = require('./modals');
 var VehiclesComponent = (function () {
     function VehiclesComponent() {
-        this.cabObject = [new modals_1.Vehicle('id', '', 7, 13, 'Toyota - AC', 'Preferable for black families'),
+        this.cabObject = [new modals_1.Vehicle('id', '', 7, 13, 'Toyota - AC', 'Preferable for large families'),
             new modals_1.Vehicle('id', '', 5, 10, 'Indica - AC', 'Preferable for small families'),
             new modals_1.Vehicle('id', '', 5, 10, 'Indica - Non - AC', 'Preferable for small families'),
             new modals_1.Vehicle('id', '', 5, 10, 'Toyota - Non - AC', 'Preferable for small families')];
