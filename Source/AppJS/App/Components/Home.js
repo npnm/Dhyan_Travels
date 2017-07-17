@@ -17,16 +17,18 @@ var HomeComponent = (function () {
     function HomeComponent(formBuilder) {
         this.formBuilder = formBuilder;
         this.IsCabRequest = true;
+        this.Submitted = false;
+        this.ValidationMessages = Constants_1.ValidationMessages;
         this.createForm = function () {
             this.enquiryForm = this.formBuilder.group({
-                'FullName': [this.EnquiryRequest.Customer.FullName, [Directives_1.validateField(new Constants_1.CustomValidationRules('FullName'), this.enquiryForm)]],
-                'PhoneNumber': [this.EnquiryRequest.Customer.PhoneNumber, [Directives_1.validateField(new Constants_1.CustomValidationRules('PhoneNumber'), this.enquiryForm)]],
-                'TravelDate': [this.EnquiryRequest.TravelDate, [Directives_1.validateField(new Constants_1.CustomValidationRules('TravelDate'), this.enquiryForm)]],
-                'Cab_FromPlace': [this.EnquiryRequest.Cab_FromPlace, [Directives_1.validateField(new Constants_1.CustomValidationRules('Cab_FromPlace'), this.enquiryForm)]],
-                'Cab_ToPlace': [this.EnquiryRequest.Cab_ToPlace, [Directives_1.validateField(new Constants_1.CustomValidationRules('Cab_ToPlace'), this.enquiryForm)]],
-                'Trip_NumberOfDays': [this.EnquiryRequest.Trip_NumberOfDays, [Directives_1.validateField(new Constants_1.CustomValidationRules('Trip_NumberOfDays'), this.enquiryForm)]],
-                'Trip_Places': [this.EnquiryRequest.Trip_Places, [Directives_1.validateField(new Constants_1.CustomValidationRules('Trip_Places'), this.enquiryForm)]],
-                'Vehicle': [this.EnquiryRequest.Vehicle.ID, [Directives_1.validateField(new Constants_1.CustomValidationRules('Vehicle'), this.enquiryForm)]]
+                'FullName': [this.EnquiryRequest.Customer.FullName, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('FullName'), this.enquiryForm)]],
+                'PhoneNumber': [this.EnquiryRequest.Customer.PhoneNumber, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('PhoneNumber'), this.enquiryForm)]],
+                'TravelDate': [this.EnquiryRequest.TravelDate, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('TravelDate'), this.enquiryForm)]],
+                'Cab_FromPlace': [this.EnquiryRequest.Cab_FromPlace, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('Cab_FromPlace'), this.enquiryForm)]],
+                'Cab_ToPlace': [this.EnquiryRequest.Cab_ToPlace, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('Cab_ToPlace'), this.enquiryForm)]],
+                'Trip_NumberOfDays': [this.EnquiryRequest.Trip_NumberOfDays, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('Trip_NumberOfDays'), this.enquiryForm)]],
+                'Trip_Places': [this.EnquiryRequest.Trip_Places, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('Trip_Places'), this.enquiryForm)]],
+                'Vehicle': [this.EnquiryRequest.Vehicle.ID, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('Vehicle'), this.enquiryForm)]]
             });
         };
         this.ToggleService = function (requestType) {
@@ -41,6 +43,10 @@ var HomeComponent = (function () {
         this.SubmitEnquiryRequest = function (action) {
             if (action === Constants_1.ApplicationConstants.CustomerAction.SUBMIT) {
                 this.EnquiryRequest = this.enquiryForm.value;
+                if (this.enquiryForm.valid) {
+                    this.EnquiryRequest = this.enquiryForm.value;
+                    this.EnquiryRequest.Customer = new Modals_1.Customer(this.EnquiryRequest.FullName, this.EnquiryRequest.PhoneNumber);
+                }
             }
             else if (action === Constants_1.ApplicationConstants.CustomerAction.CLEAR) {
                 this.createForm();

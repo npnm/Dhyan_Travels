@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Customer, Contact, Vehicle, EnquiryRequest, ContactUsRequest } from './Modals';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validateField } from '../Common/Directives';
-import { CustomValidationRules, ApplicationConstants } from '../Common/Constants';
+import { CustomValidationRules, ValidationMessages, ApplicationConstants } from '../Common/Constants';
 import { APIService } from '../Api/Services';
 @Component(
     {
@@ -13,6 +13,8 @@ export class HomeComponent {
     public EnquiryRequest: EnquiryRequest;
     public enquiryForm: FormGroup;
     public IsCabRequest: boolean = true;
+    private Submitted: boolean = false;
+    private ValidationMessages = ValidationMessages;
     constructor(private formBuilder: FormBuilder) {
         this.EnquiryRequest = new EnquiryRequest(new Customer('', '', '', '', '', ''), '', '', new Vehicle('', '', 0, 0, '', ''));
     }
@@ -26,14 +28,14 @@ export class HomeComponent {
 
     createForm = function () {
         this.enquiryForm = this.formBuilder.group({
-            'FullName': [this.EnquiryRequest.Customer.FullName, [validateField(new CustomValidationRules('FullName'), this.enquiryForm)]],
-            'PhoneNumber': [this.EnquiryRequest.Customer.PhoneNumber, [validateField(new CustomValidationRules('PhoneNumber'), this.enquiryForm)]],
-            'TravelDate': [this.EnquiryRequest.TravelDate, [validateField(new CustomValidationRules('TravelDate'), this.enquiryForm)]],
-            'Cab_FromPlace': [this.EnquiryRequest.Cab_FromPlace, [validateField(new CustomValidationRules('Cab_FromPlace'), this.enquiryForm)]],
-            'Cab_ToPlace': [this.EnquiryRequest.Cab_ToPlace, [validateField(new CustomValidationRules('Cab_ToPlace'), this.enquiryForm)]],
-            'Trip_NumberOfDays': [this.EnquiryRequest.Trip_NumberOfDays, [validateField(new CustomValidationRules('Trip_NumberOfDays'), this.enquiryForm)]],
-            'Trip_Places': [this.EnquiryRequest.Trip_Places, [validateField(new CustomValidationRules('Trip_Places'), this.enquiryForm)]],
-            'Vehicle': [this.EnquiryRequest.Vehicle.ID, [validateField(new CustomValidationRules('Vehicle'), this.enquiryForm)]]
+            'FullName': [this.EnquiryRequest.Customer.FullName, [Validators.required, validateField(new CustomValidationRules('FullName'), this.enquiryForm)]],
+            'PhoneNumber': [this.EnquiryRequest.Customer.PhoneNumber, [Validators.required, validateField(new CustomValidationRules('PhoneNumber'), this.enquiryForm)]],
+            'TravelDate': [this.EnquiryRequest.TravelDate, [Validators.required, validateField(new CustomValidationRules('TravelDate'), this.enquiryForm)]],
+            'Cab_FromPlace': [this.EnquiryRequest.Cab_FromPlace, [Validators.required, validateField(new CustomValidationRules('Cab_FromPlace'), this.enquiryForm)]],
+            'Cab_ToPlace': [this.EnquiryRequest.Cab_ToPlace, [Validators.required, validateField(new CustomValidationRules('Cab_ToPlace'), this.enquiryForm)]],
+            'Trip_NumberOfDays': [this.EnquiryRequest.Trip_NumberOfDays, [Validators.required, validateField(new CustomValidationRules('Trip_NumberOfDays'), this.enquiryForm)]],
+            'Trip_Places': [this.EnquiryRequest.Trip_Places, [Validators.required, validateField(new CustomValidationRules('Trip_Places'), this.enquiryForm)]],
+            'Vehicle': [this.EnquiryRequest.Vehicle.ID, [Validators.required, validateField(new CustomValidationRules('Vehicle'), this.enquiryForm)]]
 
         });
     }
@@ -48,8 +50,13 @@ export class HomeComponent {
         this.createForm();
     }
     SubmitEnquiryRequest = function (action: string) {
+
         if (action === ApplicationConstants.CustomerAction.SUBMIT) {
             this.EnquiryRequest = this.enquiryForm.value;
+            if (this.enquiryForm.valid) {
+                this.EnquiryRequest = this.enquiryForm.value;
+                this.EnquiryRequest.Customer = new Customer(this.EnquiryRequest.FullName, this.EnquiryRequest.PhoneNumber);
+            }
         }
         else if (action === ApplicationConstants.CustomerAction.CLEAR) {
             this.createForm();
