@@ -15,7 +15,8 @@ var VehiclesComponent = (function () {
         this.cabObject = [new modals_1.Vehicle('id', '', 7, 13, 'Toyota - AC', 'Preferable for large families'),
             new modals_1.Vehicle('id', '', 5, 10, 'Indica - AC', 'Preferable for small families'),
             new modals_1.Vehicle('id', '', 5, 10, 'Indica - Non - AC', 'Preferable for small families'),
-            new modals_1.Vehicle('id', '', 5, 10, 'Toyota - Non - AC', 'Preferable for small families')];
+            new modals_1.Vehicle('id', '', 5, 10, 'Toyota - Non - AC', 'Preferable for small families'),
+            new modals_1.Vehicle('id', '', 8, 10, 'Shya - Non - AC', 'Preferable for heavy families')];
     }
     VehiclesComponent = __decorate([
         core_1.Component({

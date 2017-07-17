@@ -18,6 +18,9 @@ body {
 .mainheader {
     background: #ffd205;
 }
+h1{
+    text-align: center;
+}
 
 button {
     background: #ffd205;
@@ -399,56 +402,6 @@ button:hover {
     margin-left: 5px;
 }
 
-@media (max-width:800px) {
-    .cabsList {
-        width: 100%;
-    }
-}
-
-@media (max-width:677px) {
-    .cabsList .cabs-repeat .cab-details .cab-description>.cab-desc {
-        width: calc(100% - 150px);
-        border: 0;
-        padding: 0 10px;
-    }
-    .cabsList .cabs-repeat .cab-details .cab-description>.cab-rate {
-        width: calc(100% - 150px);
-        padding: 0 10px;
-    }
-    .cabsList .cabs-repeat .cab-details .cab-description>.cab-desc p {
-        margin: 0;
-        margin-bottom: 5px;
-    }
-    .cabsList .cabs-repeat .cab-details .cab-description>.cab-rate .nghf {
-        margin-top: 0px;
-        margin-bottom: 8px;
-    }
-}
-
-@media(max-width:450px) {
-    .cabsList .cabs-repeat,
-    .cabsList .cabs-repeat button {
-        font-size: 0.875em;
-    }
-    .cabsList .cabs-repeat .cab-details .cab-description>.cab-img {
-        width: 100px;
-        height: 100px;
-    }
-    .cabsList .cabs-repeat .cab-details .cab-img>img{
-        height: 67px;
-    } 
-    .cabsList .cabs-repeat .cab-details .cab-description>.cab-desc {
-        width: calc(100% - 100px);
-        border: 0;
-        padding: 0 0px 0 10px;
-    }
-    .cabsList .cabs-repeat .cab-details .cab-description>.cab-rate {
-        width: calc(100% - 100px);
-        padding: 0 0px 0 10px;
-    }
-}
-
-
 /*aboutUs*/
 
 .aboutus {
@@ -458,7 +411,6 @@ button:hover {
     height: 465px;
 }
 
-.aboutus h1,
 .aboutus .service {
     text-align: center;
 }
@@ -655,7 +607,8 @@ footer {
     width: 100%;
     height: 50px;
     bottom: 0;
-    text-align: center;
+    text-align: center;    
+    font-size: 15px;
 }
 
 footer .footer-line {
@@ -669,7 +622,6 @@ footer .footer-line {
 footer .footer-content div {
     color: rgba(245, 245, 245, 0.70);
     margin-top: 15px;
-    font-size: 15px;
     display: inline-table;
 }
 
@@ -783,6 +735,68 @@ footer .footer-content a:hover {
 
 
 /*Device Specific*/
+@media (max-width:800px) {
+    .cabsList {
+        width: 100%;
+        font-size: 10px;
+    }
+    .cabsList h1{
+        font-size: 20px;
+    }
+    .cabsList .cabs-repeat .cab-details .cab-rate button{
+            height: 20px;
+    width: 50px;
+    min-height: 20px;
+    min-width: 50px;
+    font-size: 12px;
+    padding: 0px 0px;
+    }
+}
+
+@media (max-width:677px) {
+    .cabsList .cabs-repeat{
+        padding: 3px 10px;
+    }
+    .cabsList .cabs-repeat .cab-details .cab-description>.cab-desc {
+        width: calc(100% - 150px);
+        border: 0;
+        padding: 0 20px;
+    }
+    .cabsList .cabs-repeat .cab-details .cab-description>.cab-rate {
+        width: calc(100% - 150px);
+        padding: 0 20px;
+    }
+    .cabsList .cabs-repeat .cab-details .cab-description>.cab-desc p {
+        margin: 0;
+        margin-bottom: 5px;
+    }
+    .cabsList .cabs-repeat .cab-details .cab-description>.cab-rate .nghf {
+        margin-top: 0px;
+        margin-bottom: 8px;
+    }
+}
+
+@media(max-width:450px) {
+    .cabsList .cabs-repeat {
+        font-size: 10px;
+    }
+    .cabsList .cabs-repeat .cab-details .cab-description>.cab-img {
+        width: 100px;
+        height: 85px;
+    }
+    .cabsList .cabs-repeat .cab-details .cab-img>img{
+        height: 67px;
+    } 
+    .cabsList .cabs-repeat .cab-details .cab-description>.cab-desc {
+        width: calc(100% - 100px);
+        border: 0;
+        padding: 0 0px 0 10px;
+    }
+    .cabsList .cabs-repeat .cab-details .cab-description>.cab-rate {
+        width: calc(100% - 100px);
+        padding: 0 0px 0 10px;
+    }
+}
 
 @media (max-width:600px) {
     /* smartphones, iPhone, portrait 480x320 phones */
@@ -794,6 +808,10 @@ footer .footer-content a:hover {
         margin: auto;
         position: inherit;
         top: 0;
+    }
+    .nav
+    {
+       height: 45px;
     }
     .nav .navlist {
         position: absolute;
@@ -855,19 +873,59 @@ footer .footer-content a:hover {
     .cabsList .cabs-repeat .cab-details .cab-description .cab-rate {
         float: right;
     }*/
+
+    /*About Us*/
+   .page-content .aboutus{
+    width: 100%;
+    padding: 10px;
+     margin-left: 0px; 
+    text-align: justify;
+   }
+
+   .page-content .aboutus p{
+       font-size: 10px;
+   }
+ .page-content .aboutus .service .content
+{
+    width: 90%;
+        margin: 5px 0px 0px 0px;
+            height: 110px;
+
+}
+.page-content .aboutus .service
+{
+    overflow: hidden;
+}
     /*Contact Us*/
+
+    .page-content .content h1, .page-content .aboutus h1{
+            font-size: 20px;
+    }
     .page-content .content .contactus-options {
         margin-bottom: 20px;
+        height: 80px;
     }
+     .page-content .content .contactus-options .contactus{
+         height: none;
+     }
     .page-content .content .contactus-options .contactus span {
         font-size: 30px;
     }
     .page-content .content .contactus-options .contactus .text {
-        font-size: 10px;
+        font-size: 8px;
     }
     .page-content .content .client-info .clientInfoTable .clientInfo .row .text {
         width: 100%;
         display: inline-block;
+    }
+    .page-content .content .client-info .clientInfoTable .clientInfo {
+       padding: 1px 0px;
+    }
+    .page-content .content .client-info .clientInfoTable .clientInfo .mid-header{
+        margin: 10px;
+    }
+    .page-content .content .client-info .clientInfoTable .clientInfo .row {      
+    margin: 25px 5px;
     }
     .page-content .content .client-info .clientInfoTable .clientInfo .row .text label {
         float: left;
@@ -876,12 +934,27 @@ footer .footer-content a:hover {
     .page-content .content .client-info .clientInfoTable .clientInfo .row .control input {
         width: 100%;
     }
-    .page-content .content .client-info .clientInfoTable {
-        padding: 10% 2%;
+    .page-content .content .client-info{
+        padding: 1% 5%;
     }
+    .page-content .content .client-info .row .control .error-msg{
+        width: 100%;
+    }
+    
     .page-content .content .client-info .clientInfoTable .clientInfoButton {
-        padding-left: 115px;
+        padding-left: 0px;
     }
+
+    /*Footer*/
+
+    footer .footer-content{
+        padding: 5px 1px;
+        font-size: 12px;
+    }
+    footer .footer-content div {
+    margin-top: 5px;
+    }
+    
 }
 
 @media (max-width:950px) and (min-width:600px) {

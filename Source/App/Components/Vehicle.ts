@@ -10,7 +10,8 @@ export class VehiclesComponent {
         this.cabObject = [new Vehicle('id', '', 7, 13, 'Toyota - AC', 'Preferable for large families'),
         new Vehicle('id', '', 5, 10, 'Indica - AC', 'Preferable for small families'),
         new Vehicle('id', '', 5, 10, 'Indica - Non - AC', 'Preferable for small families'),
-        new Vehicle('id', '', 5, 10, 'Toyota - Non - AC', 'Preferable for small families')];
+        new Vehicle('id', '', 5, 10, 'Toyota - Non - AC', 'Preferable for small families'),
+        new Vehicle('id', '', 8, 10, 'Shya - Non - AC', 'Preferable for heavy families')];
 
     }
 }
