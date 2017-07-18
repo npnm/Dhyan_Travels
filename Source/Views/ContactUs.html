@@ -45,7 +45,7 @@
                         <div class="control">
                             <div class="input">
                                 <input [ngClass]="{'Error': contactUsForm.controls.FullName.errors}" type="text" formControlName="FullName" />
-                                <p class="error-msg" *ngIf="contactUsForm.controls.FullName.errors">{{contactUsForm.controls.FullName.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('FullName')">{{ReturnValid('FullName')}}</p>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                             <div class="input">
                                 <input [ngClass]="{'Error': contactUsForm.controls.PhoneNumber.errors}" type="text" id="phoneNumber" formControlName="PhoneNumber"
                                     maxlength="10" />
-                                <p class="error-msg" *ngIf="contactUsForm.controls.PhoneNumber.errors">{{contactUsForm.controls.PhoneNumber.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('PhoneNumber')">{{ReturnValid('PhoneNumber')}}</p>
                             </div>
                         </div>
                     </div>
@@ -68,15 +68,15 @@
                         <div class="control">
                             <div class="input">
                                 <input [ngClass]="{'Error': contactUsForm.controls.EmailId.errors}" type="text" formControlName="EmailId" />
-                                <p class="error-msg" *ngIf="contactUsForm.controls.EmailId.errors">{{contactUsForm.controls.EmailId.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('EmailId')">{{ReturnValid('EmailId')}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="clientInfoButton">
                     <div>
-                        <button style="margin-right:10px">Clear</button>
-                        <button>Submit</button>
+                        <button (click)="SubmitContactRequest('SUBMIT')">Submit</button>                        
+                        <button (click)="SubmitContactRequest('CLEAR')">Clear</button>
                     </div>
                 </div>
             </div>

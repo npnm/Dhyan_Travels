@@ -32,6 +32,7 @@ var HomeComponent = (function () {
             });
         };
         this.ToggleService = function (requestType) {
+            this.Submitted = false;
             if (requestType === Constants_1.ApplicationConstants.RequestType.CAB) {
                 this.IsCabRequest = true;
             }
@@ -40,9 +41,25 @@ var HomeComponent = (function () {
             }
             this.createForm();
         };
+        this.ReturnValid = function (controlName) {
+            var returnValue = '';
+            if (controlName !== "") {
+                if (this.enquiryForm.controls[controlName].errors !== null) {
+                    if (this.enquiryForm.controls[controlName].errors.message !== undefined) {
+                        return this.enquiryForm.controls[controlName].errors.message;
+                    }
+                    else if (this.enquiryForm.controls[controlName].errors.required === true && this.Submitted) {
+                        return this.ValidationMessages.Messages[controlName + '_Required'];
+                    }
+                    else {
+                        '';
+                    }
+                }
+            }
+        };
         this.SubmitEnquiryRequest = function (action) {
             if (action === Constants_1.ApplicationConstants.CustomerAction.SUBMIT) {
-                this.EnquiryRequest = this.enquiryForm.value;
+                this.Submitted = true;
                 if (this.enquiryForm.valid) {
                     this.EnquiryRequest = this.enquiryForm.value;
                     this.EnquiryRequest.Customer = new Modals_1.Customer(this.EnquiryRequest.FullName, this.EnquiryRequest.PhoneNumber);
@@ -54,7 +71,7 @@ var HomeComponent = (function () {
             console.log(this.EnquiryRequest);
             return;
         };
-        this.EnquiryRequest = new Modals_1.EnquiryRequest(new Modals_1.Customer('', '', '', '', '', ''), '', '', new Modals_1.Vehicle('', '', 0, 0, '', ''));
+        this.EnquiryRequest = new Modals_1.EnquiryRequest(new Modals_1.Customer('', '', ''), '', '', '', '', '', new Modals_1.Vehicle('', '', 0, 0, '', ''));
     }
     HomeComponent.prototype.ngOnInit = function () {
         this.buildForm();

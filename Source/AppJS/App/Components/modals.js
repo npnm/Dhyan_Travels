@@ -1,24 +1,6 @@
 "use strict";
 var Customer = (function () {
-    function Customer(FullName, PhoneNumber, FromPlace, ToPlace, NoOfPassengers, Type) {
-        if (FullName === void 0) { FullName = ''; }
-        if (PhoneNumber === void 0) { PhoneNumber = ''; }
-        if (FromPlace === void 0) { FromPlace = ''; }
-        if (ToPlace === void 0) { ToPlace = ''; }
-        if (NoOfPassengers === void 0) { NoOfPassengers = ''; }
-        if (Type === void 0) { Type = ''; }
-        this.FullName = FullName;
-        this.PhoneNumber = PhoneNumber;
-        this.FromPlace = FromPlace;
-        this.ToPlace = ToPlace;
-        this.NoOfPassengers = NoOfPassengers;
-        this.Type = Type;
-    }
-    return Customer;
-}());
-exports.Customer = Customer;
-var Contact = (function () {
-    function Contact(FullName, PhoneNumber, EmailId) {
+    function Customer(FullName, PhoneNumber, EmailId) {
         if (FullName === void 0) { FullName = ''; }
         if (PhoneNumber === void 0) { PhoneNumber = ''; }
         if (EmailId === void 0) { EmailId = ''; }
@@ -26,9 +8,9 @@ var Contact = (function () {
         this.PhoneNumber = PhoneNumber;
         this.EmailId = EmailId;
     }
-    return Contact;
+    return Customer;
 }());
-exports.Contact = Contact;
+exports.Customer = Customer;
 var Vehicle = (function () {
     function Vehicle(ID, Type, Capacity, CostPerKiloMeter, Title, ShortDescription) {
         if (ID === void 0) { ID = ''; }
@@ -48,16 +30,22 @@ var Vehicle = (function () {
 }());
 exports.Vehicle = Vehicle;
 var EnquiryRequest = (function () {
-    function EnquiryRequest(tempCustomer, FromPlace, ToPlace, tempCab) {
-        if (FromPlace === void 0) { FromPlace = ''; }
-        if (ToPlace === void 0) { ToPlace = ''; }
+    function EnquiryRequest(tempCustomer, TravelDate, Cab_ToPlace, Cab_FromPlace, Trip_NumberOfDays, Trip_Places, tempCab) {
+        if (TravelDate === void 0) { TravelDate = ''; }
+        if (Cab_ToPlace === void 0) { Cab_ToPlace = ''; }
+        if (Cab_FromPlace === void 0) { Cab_FromPlace = ''; }
+        if (Trip_NumberOfDays === void 0) { Trip_NumberOfDays = ''; }
+        if (Trip_Places === void 0) { Trip_Places = ''; }
         if (tempCab === void 0) { tempCab = null; }
-        this.Cab_FromPlace = FromPlace;
-        this.Cab_ToPlace = ToPlace;
+        this.Cab_FromPlace = Cab_FromPlace;
+        this.Cab_ToPlace = Cab_ToPlace;
+        this.TravelDate = TravelDate;
+        this.Trip_NumberOfDays = Trip_NumberOfDays;
+        this.Trip_Places = Trip_Places;
         if (tempCustomer === null) {
             tempCustomer = new Customer('', '', '');
         }
-        this.Customer = new Customer(tempCustomer.FullName, tempCustomer.PhoneNumber);
+        this.Customer = new Customer(tempCustomer.FullName, tempCustomer.PhoneNumber, tempCustomer.EmailId);
         if (tempCab === null) {
             tempCab = new Vehicle('', '', 0, 0);
         }
@@ -68,12 +56,10 @@ var EnquiryRequest = (function () {
 exports.EnquiryRequest = EnquiryRequest;
 var ContactUsRequest = (function () {
     function ContactUsRequest(tempContact) {
-        // this.FromPlace = FromPlace;
-        // this.ToPlace = ToPlace;
         if (tempContact === null) {
-            tempContact = new Contact('', '', '');
+            tempContact = new Customer('', '', '');
         }
-        this.Contact = new Contact(tempContact.FullName, tempContact.PhoneNumber, tempContact.EmailId);
+        this.Customer = new Customer(tempContact.FullName, tempContact.PhoneNumber, tempContact.EmailId);
     }
     return ContactUsRequest;
 }());

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Customer, Contact, Vehicle, EnquiryRequest, ContactUsRequest } from './Modals';
+import { Customer, Vehicle, EnquiryRequest, ContactUsRequest } from './Modals';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validateField } from '../Common/Directives';
 import { CustomValidationRules, ValidationMessages, ApplicationConstants } from '../Common/Constants';
@@ -16,7 +16,7 @@ export class HomeComponent {
     private Submitted: boolean = false;
     private ValidationMessages = ValidationMessages;
     constructor(private formBuilder: FormBuilder) {
-        this.EnquiryRequest = new EnquiryRequest(new Customer('', '', '', '', '', ''), '', '', new Vehicle('', '', 0, 0, '', ''));
+        this.EnquiryRequest = new EnquiryRequest(new Customer('', '', ''), '', '', '', '', '', new Vehicle('', '', 0, 0, '', ''));
     }
     ngOnInit() {
         this.buildForm();
@@ -41,6 +41,7 @@ export class HomeComponent {
     }
 
     ToggleService = function (requestType: string) {
+        this.Submitted = false;
         if (requestType === ApplicationConstants.RequestType.CAB) {
             this.IsCabRequest = true;
         }
@@ -49,10 +50,29 @@ export class HomeComponent {
         }
         this.createForm();
     }
-    SubmitEnquiryRequest = function (action: string) {
 
+    ReturnValid = function (controlName: string) {
+        var returnValue = '';
+        if (controlName !== "") {
+            if (this.enquiryForm.controls[controlName].errors !== null) {
+                if (this.enquiryForm.controls[controlName].errors.message !== undefined) {
+                    return this.enquiryForm.controls[controlName].errors.message;
+                }
+                else if (this.enquiryForm.controls[controlName].errors.required === true && this.Submitted) {
+                    return this.ValidationMessages.Messages[controlName + '_Required'];
+                }
+                else {
+                    '';
+                }
+            }
+        }
+    }
+
+
+
+    SubmitEnquiryRequest = function (action: string) {
         if (action === ApplicationConstants.CustomerAction.SUBMIT) {
-            this.EnquiryRequest = this.enquiryForm.value;
+            this.Submitted = true;
             if (this.enquiryForm.valid) {
                 this.EnquiryRequest = this.enquiryForm.value;
                 this.EnquiryRequest.Customer = new Customer(this.EnquiryRequest.FullName, this.EnquiryRequest.PhoneNumber);

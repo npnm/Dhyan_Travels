@@ -17,7 +17,36 @@ var ContactUsComponent = (function () {
     function ContactUsComponent(fb) {
         this.fb = fb;
         this.ContactUsText = "Contact Us";
-        this.ContactUsRequest = new modals_1.ContactUsRequest(new modals_1.Contact('', '', ''));
+        this.ReturnValid = function (controlName) {
+            var returnValue = '';
+            if (controlName !== "") {
+                if (this.contactUsForm.controls[controlName].errors !== null) {
+                    if (this.contactUsForm.controls[controlName].errors.message !== undefined) {
+                        return this.contactUsForm.controls[controlName].errors.message;
+                    }
+                    else if (this.contactUsForm.controls[controlName].errors.required === true && this.Submitted) {
+                        return this.ValidationMessages.Messages[controlName + '_Required'];
+                    }
+                    else {
+                        '';
+                    }
+                }
+            }
+        };
+        this.SubmitContactRequest = function (action) {
+            if (action === Constants_1.ApplicationConstants.CustomerAction.SUBMIT) {
+                this.Submitted = true;
+                if (this.contactUsForm.valid) {
+                    this.ContactUsRequest.Customer = new modals_1.Customer(this.contactUsForm.FullName, this.contactUsForm.PhoneNumber, this.contactUsForm.EmailId);
+                }
+            }
+            else if (action === Constants_1.ApplicationConstants.CustomerAction.CLEAR) {
+                this.createForm();
+            }
+            console.log(this.ContactUsRequest);
+            return;
+        };
+        this.ContactUsRequest = new modals_1.ContactUsRequest(new modals_1.Customer('', '', ''));
         this.clientInfoTableClass = ["clientInfoTable"];
     }
     ContactUsComponent.prototype.ngOnInit = function () {
@@ -25,9 +54,9 @@ var ContactUsComponent = (function () {
     };
     ContactUsComponent.prototype.buildForm = function () {
         this.contactUsForm = this.fb.group({
-            'FullName': [this.ContactUsRequest.Contact.FullName, [Directives_1.validateField(new Constants_1.CustomValidationRules('FullName'), this.contactUsForm)]],
-            'PhoneNumber': [this.ContactUsRequest.Contact.PhoneNumber, [Directives_1.validateField(new Constants_1.CustomValidationRules('PhoneNumber'), this.contactUsForm)]],
-            'EmailId': [this.ContactUsRequest.Contact.EmailId, [Directives_1.validateField(new Constants_1.CustomValidationRules('EmailId'), this.contactUsForm)]]
+            'FullName': [this.ContactUsRequest.Customer.FullName, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('FullName'), this.contactUsForm)]],
+            'PhoneNumber': [this.ContactUsRequest.Customer.PhoneNumber, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('PhoneNumber'), this.contactUsForm)]],
+            'EmailId': [this.ContactUsRequest.Customer.EmailId, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('EmailId'), this.contactUsForm)]]
         });
     };
     ContactUsComponent.prototype.NavigateToFacebook = function () {
