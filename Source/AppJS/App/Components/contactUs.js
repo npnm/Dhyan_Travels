@@ -16,6 +16,8 @@ var Constants_1 = require('../Common/Constants');
 var ContactUsComponent = (function () {
     function ContactUsComponent(fb) {
         this.fb = fb;
+        this.ValidationMessages = Constants_1.ValidationMessages;
+        this.Submitted = false;
         this.ContactUsText = "Contact Us";
         this.ReturnValid = function (controlName) {
             var returnValue = '';
@@ -38,12 +40,12 @@ var ContactUsComponent = (function () {
                 this.Submitted = true;
                 if (this.contactUsForm.valid) {
                     this.ContactUsRequest.Customer = new modals_1.Customer(this.contactUsForm.FullName, this.contactUsForm.PhoneNumber, this.contactUsForm.EmailId);
+                    console.log(this.ContactUsRequest);
                 }
             }
             else if (action === Constants_1.ApplicationConstants.CustomerAction.CLEAR) {
-                this.createForm();
+                this.buildForm();
             }
-            console.log(this.ContactUsRequest);
             return;
         };
         this.ContactUsRequest = new modals_1.ContactUsRequest(new modals_1.Customer('', '', ''));
@@ -53,6 +55,7 @@ var ContactUsComponent = (function () {
         this.buildForm();
     };
     ContactUsComponent.prototype.buildForm = function () {
+        this.Submitted = false;
         this.contactUsForm = this.fb.group({
             'FullName': [this.ContactUsRequest.Customer.FullName, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('FullName'), this.contactUsForm)]],
             'PhoneNumber': [this.ContactUsRequest.Customer.PhoneNumber, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('PhoneNumber'), this.contactUsForm)]],

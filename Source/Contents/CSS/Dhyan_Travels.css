@@ -58,12 +58,15 @@ button:hover {
     font-size: 20px;
 }
 
-.nav .navlist li {
-    color: #00355f;
+.nav .navlist li {   
     display: table-cell;
     width: 150px;
     height: 30px;
     text-align: center;
+}
+.nav .navlist li a{
+    text-decoration: none;
+     color: #00355f;
 }
 
 .nav .navlist li a:hover {
@@ -627,10 +630,13 @@ footer .footer-content div {
 
 footer .footer-content a {
     margin-right: 10px;
+       color: rgba(245, 245, 245, 0.70);
+       text-decoration: none;
 }
 
 footer .footer-content a:hover {
     color: whitesmoke;
+    text-decoration: underline;
 }
 
 @font-face {

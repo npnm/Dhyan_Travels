@@ -14,7 +14,8 @@ export class ContactUsComponent {
     public contactUsForm: FormGroup;
     public Customer: Customer;
     public clientInfoTableClass: string[];
-    private ValidationMessages: ValidationMessages;
+    private ValidationMessages = ValidationMessages;
+    private Submitted: boolean = false;
     constructor(private fb: FormBuilder) {
         this.ContactUsRequest = new ContactUsRequest(new Customer('', '', ''));
         this.clientInfoTableClass = ["clientInfoTable"]
@@ -24,6 +25,7 @@ export class ContactUsComponent {
     }
 
     buildForm(): void {
+        this.Submitted = false;
         this.contactUsForm = this.fb.group({
             'FullName': [this.ContactUsRequest.Customer.FullName, [Validators.required, validateField(new CustomValidationRules('FullName'), this.contactUsForm)]],
             'PhoneNumber': [this.ContactUsRequest.Customer.PhoneNumber, [Validators.required, validateField(new CustomValidationRules('PhoneNumber'), this.contactUsForm)]],
@@ -58,12 +60,12 @@ export class ContactUsComponent {
             this.Submitted = true;
             if (this.contactUsForm.valid) {
                 this.ContactUsRequest.Customer = new Customer(this.contactUsForm.FullName, this.contactUsForm.PhoneNumber, this.contactUsForm.EmailId);
+                console.log(this.ContactUsRequest);
             }
         }
         else if (action === ApplicationConstants.CustomerAction.CLEAR) {
-            this.createForm();
+            this.buildForm();
         }
-        console.log(this.ContactUsRequest);
         return;
     }
 

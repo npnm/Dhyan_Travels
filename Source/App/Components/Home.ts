@@ -23,10 +23,7 @@ export class HomeComponent {
     }
 
     buildForm(): void {
-        this.createForm();
-    }
-
-    createForm = function () {
+        this.Submitted = false;
         this.enquiryForm = this.formBuilder.group({
             'FullName': [this.EnquiryRequest.Customer.FullName, [Validators.required, validateField(new CustomValidationRules('FullName'), this.enquiryForm)]],
             'PhoneNumber': [this.EnquiryRequest.Customer.PhoneNumber, [Validators.required, validateField(new CustomValidationRules('PhoneNumber'), this.enquiryForm)]],
@@ -41,14 +38,13 @@ export class HomeComponent {
     }
 
     ToggleService = function (requestType: string) {
-        this.Submitted = false;
         if (requestType === ApplicationConstants.RequestType.CAB) {
             this.IsCabRequest = true;
         }
         else {
             this.IsCabRequest = false;
         }
-        this.createForm();
+        this.buildForm();
     }
 
     ReturnValid = function (controlName: string) {
@@ -76,12 +72,13 @@ export class HomeComponent {
             if (this.enquiryForm.valid) {
                 this.EnquiryRequest = this.enquiryForm.value;
                 this.EnquiryRequest.Customer = new Customer(this.EnquiryRequest.FullName, this.EnquiryRequest.PhoneNumber);
+                console.log(this.EnquiryRequest);
+
             }
         }
         else if (action === ApplicationConstants.CustomerAction.CLEAR) {
-            this.createForm();
+            this.buildForm();
         }
-        console.log(this.EnquiryRequest);
         return;
     }
 }

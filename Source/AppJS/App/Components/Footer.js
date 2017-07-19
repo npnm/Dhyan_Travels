@@ -9,21 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var router_1 = require('@angular/router');
+var MenuItems_1 = require('./MenuItems');
 var FooterComponent = (function () {
-    function FooterComponent(route) {
-        this.route = route;
+    function FooterComponent() {
+        this.MenuItemsComponentObejct = new MenuItems_1.MenuItemsComponent();
+        this.LinkItems = this.MenuItemsComponentObejct.LinkItems;
     }
-    FooterComponent.prototype.AppNavigation = function (linkObject) {
-        console.log(linkObject);
-        this.route.navigate(linkObject);
-    };
     FooterComponent = __decorate([
         core_1.Component({
             selector: 'footer-content',
-            template: "<footer>\n\t\t<div class=\"footer-content\">\n\t\t<div>Copyright \u00A9 2017 Dhyan Travels   |   </div>\n\t\t<div>\n            <a (click)=\"AppNavigation('/Home')\">Enquiry</a>\n            <a (click)=\"AppNavigation('/Cabs')\">Cabs</a>\n            <a (click)=\"AppNavigation('/AboutUs')\">About</a>\n            <a (click)=\"AppNavigation('/ContactUs')\" >Contact</a>\n\t\t</div>\n         </div>\n    </footer>"
+            template: "<footer>\n\t\t<div class=\"footer-content\">\n\t\t<div>Copyright \u00A9 2017 Dhyan Travels   |   </div>\n\t\t<div ><a *ngFor=\"let links of LinkItems\" [routerLink]=\"[links.Link]\" >{{links.LinkName}}</a>\n         </div>\n\t\t</div>\n    </footer>"
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [])
     ], FooterComponent);
     return FooterComponent;
 }());

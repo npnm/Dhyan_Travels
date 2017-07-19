@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart, Event } from '@angular/router';
 @Component({
     selector: 'menu-items',
     template: `   
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
         <div class="nav">
             <div class="logo"></div>
             <ul class="navlist">
-               <li [ngClass]="{'select':links.Active}" *ngFor="let links of LinkItems"><a [ngClass]="{'select':links.Active}" (click)="AppNavigation(links)">{{links.LinkName}}</a></li>  
+               <li [routerLinkActive]="['select']" *ngFor="let links of LinkItems"><a [routerLinkActive]="['select']" [routerLink]="[links.Link]">{{links.LinkName}}</a></li>  
             </ul>
 
         </div>
@@ -29,8 +29,8 @@ import { Router } from '@angular/router';
    `
 })
 export class MenuItemsComponent {
-    constructor(private route: Router) { }
-    public titleText: string = "Payana";
+    constructor() {     
+    }
 
     //Application Links
     public LinkItems = [
@@ -38,19 +38,5 @@ export class MenuItemsComponent {
         { LinkName: "Cabs", Link: "/Cabs", Active: false },
         { LinkName: "About", Link: "/AboutUs", Active: false },
         { LinkName: "Contact", Link: "/ContactUs", Active: false }];
-
-    //Function to navigate
-    AppNavigation(linkObject: any) {
-        console.log(linkObject);
-        for (var link in this.LinkItems) {
-            if(this.LinkItems[link].Link === linkObject.Link){
-                this.LinkItems[link].Active = true;
-            }
-            else{
-            this.LinkItems[link].Active = false;
-            }
-        }
-        this.route.navigate([linkObject.Link]);
-
-    }
+  
 }
