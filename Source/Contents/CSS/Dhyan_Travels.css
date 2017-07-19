@@ -424,47 +424,52 @@ button:hover {
     background: #00355f;
     color: whitesmoke;
     transition: background 2s;
-    display: inline-block;
     border-radius: 4px;
-    margin-left: 10px;
-    text-align: center;
-    content: "naaanu neenu"
-}
-
-.aboutus .service .content:hover {
-    background: whitesmoke;
-    color: #00355f;
-}
-
-.aboutus .service .content .fadedown {
-    width: 100%;
-    height: 100%;
-    display: inline-block;
+    margin-left: 45px;
     float: left;
 }
 
-.aboutus .service .content .fadedown:hover {
-    -webkit-animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 500ms;
-    -moz-animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 500ms;
-    animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 500ms;
-    overflow-y: hidden;
+/*.aboutus .service .content:hover {
+    background: whitesmoke;
+    color: #00355f;
+}*/
+
+.aboutus .service .content .fadedown { 
+    display: inline-block;
+    font-size: 40px;
+    opacity: 10%;
+      color: #00355f;
+    background: whitesmoke;
+    text-align: center;
+           width: 60%;
+    height: 100%;
+}
+
+.aboutus .service .content .fadedown:hover {    
+     -webkit-animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 1s;
+    -moz-animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 1s;
+    animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 1s;
+     animation-fill-mode: forwards;  
+        cursor: pointer;
+     
+   
 }
 
 .slide-up-now {
-    -webkit-animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 500ms;
-    -moz-animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 500ms;
-    animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 500ms;
+    -webkit-animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 1s;
+    -moz-animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 1s;
+    animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 1s;
 }
 
 @-webkit-keyframes slide-up {
-    0% {
-        -webkit-transform: translateY(100%);
-        opacity: 0%
+    0% {       
+        opacity: 30%;
     }
     100% {
-        -webkit-transform: translateY(0);
         opacity: 100%;
-        font-size: 40px;
+        font-size: 10px;
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -489,7 +494,7 @@ button:hover {
     width: 25%;
     height: 130px;
     /* font-size: 12px; */
-    /* text-align: left; */
+    /* text-align: left;                                                                                                                             */
     /*border: 1px solid rgba(0, 53, 95, 0.29);*/
     box-sizing: border-box;
     margin-left: 3%;
