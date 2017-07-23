@@ -450,8 +450,7 @@ button:hover {
     -moz-animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 1s;
     animation: slide-up .6s cubic-bezier(0.4, 0, 0.2, 1) 1s;
      animation-fill-mode: forwards;  
-        cursor: pointer;
-     
+        cursor: pointer;    
    
 }
 
