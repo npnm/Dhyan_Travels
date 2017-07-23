@@ -4,7 +4,7 @@ var bodyparser = require('body-parser');
 var cors = require('cors');
 var business = require('./business');
 var Promise = require('promise');
-var req = res = {};
+// var req = res = {};
 var allowedOrigins = ['http://localhost:3000'];
 var corsOptions = {
     origin: function (origin, callback) {
@@ -29,9 +29,9 @@ app.get('/', function (req, res) {
 })
 
 
-app.get('/ReadApplicationContentFile', function () { business.readApplicationContentFileCallback(req, res) });
-// app.post('/NotifyCustomer', business.notifyCustomerCallback());
+app.get('/ReadApplicationContentFile', function (req, res) { business.readApplicationContentFileCallback(req, res) });
+app.get('/NotifyCustomer', function (req, res) { business.notifyCustomerCallback(req, res) });
 
-app.listen(8082, function () {
-    console.log('Example app listening on port 3000!')
+app.listen(8000, function () {
+    console.log('Example app listening on port 8000!')
 })
