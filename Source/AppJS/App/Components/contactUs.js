@@ -13,9 +13,11 @@ var modals_1 = require('./modals');
 var forms_1 = require('@angular/forms');
 var Directives_1 = require('../Common/Directives');
 var Constants_1 = require('../Common/Constants');
+var Services_1 = require('../Api/Services');
 var ContactUsComponent = (function () {
-    function ContactUsComponent(fb) {
+    function ContactUsComponent(fb, APIService) {
         this.fb = fb;
+        this.APIService = APIService;
         this.ValidationMessages = Constants_1.ValidationMessages;
         this.Submitted = false;
         this.ContactUsText = "Contact Us";
@@ -69,7 +71,7 @@ var ContactUsComponent = (function () {
         core_1.Component({
             templateUrl: 'Views/ContactUs.html'
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, Services_1.APIService])
     ], ContactUsComponent);
     return ContactUsComponent;
 }());

@@ -3,6 +3,7 @@ import { Customer, Vehicle, EnquiryRequest, ContactUsRequest } from './modals';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validateField } from '../Common/Directives';
 import { CustomValidationRules, ApplicationConstants, ValidationMessages } from '../Common/Constants';
+import { APIService } from '../Api/Services';
 @Component(
     {
         templateUrl: 'Views/ContactUs.html'
@@ -16,7 +17,7 @@ export class ContactUsComponent {
     public clientInfoTableClass: string[];
     private ValidationMessages = ValidationMessages;
     private Submitted: boolean = false;
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private APIService: APIService) {
         this.ContactUsRequest = new ContactUsRequest(new Customer('', '', ''));
         this.clientInfoTableClass = ["clientInfoTable"]
     }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { APIService } from './Api/Services';
 @Component(
     {
         selector: 'app',
@@ -8,5 +9,15 @@ import { Component } from '@angular/core';
         `
     })
 export class AppComponent {
+    constructor(private APIService: APIService)
+    {
+        if (this.APIService.PageContent === undefined) {
+            this.APIService.FetchSiteContents().subscribe(data => {
+                this.APIService.PageContent = data;
+                this.APIService.LoadPage = true;
+                console.log("ReadApplicationContentFile: Response ", data);
+            });
+        }
+    }
 
 }

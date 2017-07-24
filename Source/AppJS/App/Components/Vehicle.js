@@ -10,8 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var modals_1 = require('./modals');
+var Services_1 = require('../Api/Services');
 var VehiclesComponent = (function () {
-    function VehiclesComponent() {
+    function VehiclesComponent(APIService) {
+        this.APIService = APIService;
         this.cabObject = [new modals_1.Vehicle('id', '', 7, 13, 'Toyota - AC', 'Preferable for large families'),
             new modals_1.Vehicle('id', '', 5, 10, 'Indica - AC', 'Preferable for small families'),
             new modals_1.Vehicle('id', '', 5, 10, 'Indica - Non - AC', 'Preferable for small families'),
@@ -22,7 +24,7 @@ var VehiclesComponent = (function () {
         core_1.Component({
             templateUrl: 'views/cabs.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [Services_1.APIService])
     ], VehiclesComponent);
     return VehiclesComponent;
 }());
