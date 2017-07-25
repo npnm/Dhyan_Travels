@@ -52,7 +52,7 @@ function ReadApplicationContentFile() {
 
 function notifyCustomerCallback(req, res) {
     try {
-        NotifyCustomer().then(function (data) {
+        NotifyCustomer(req).then(function (data) {
             res.status(200).json(data);
         }, function (error) {
             console.log(new Date().toLocaleString());
@@ -68,6 +68,10 @@ function notifyCustomerCallback(req, res) {
 }
 
 function NotifyCustomer(req) {
+    if (req !== undefined && req !== null && req.body !== undefined && req.body !== null) {
+        req = req.body;
+        console.log(req.body);
+    }
     var NotifyResponse = {};
     NotifyResponse.MailResponse = {};
     var promiseObject = new Promise(function (resolve, reject) {

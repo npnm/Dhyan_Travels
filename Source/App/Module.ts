@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MenuItemsComponent } from './components/menuItems';
-import { AppRouteConfig, AppRouteComponents } from './components/routeConfig'
-import { AppComponent } from './app';
-import { APIService } from './api/services';
+import { MenuItemsComponent } from './Components/MenuItems';
+import { AppRouteConfig, AppRouteComponents } from './Components/RouteConfig'
+import { AppComponent } from './App';
+import { APIService } from './Api/Services';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
