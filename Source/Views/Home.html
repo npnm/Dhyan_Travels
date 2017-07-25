@@ -1,4 +1,4 @@
-<div class="page-content">
+<div class="page-content" *ngIf="this.APIService.LoadPage">
     <form [formGroup]="enquiryForm" id="enquiryForm">
 
         <div class="movingcontent">
@@ -30,24 +30,24 @@
                         <div class="control">
                             <label class="controlname">Full Name</label>
                             <div class="inputcontrol">
-                                <input [ngClass]="{'Error': enquiryForm.controls.FullName.errors}" type="text" formControlName="FullName" placeholder="Your Full Name"
+                                <input id="Name" [ngClass]="{'Error': enquiryForm.controls.FullName.errors}" type="text" formControlName="FullName" placeholder="Your Full Name"
                                 />
-                                <p class="error-msg" *ngIf="enquiryForm.controls.FullName.errors">{{enquiryForm.controls.FullName.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('FullName')">{{ReturnValid('FullName')}}</p>
                             </div>
                         </div>
                         <div class="control">
                             <label class="controlname">Phone Number</label>
                             <div class="inputcontrol">
-                                <input [ngClass]="{'Error': enquiryForm.controls.PhoneNumber.errors}" type="text" formControlName="PhoneNumber" placeholder="Your Phone Number"
+                                <input id="Phone" [ngClass]="{'Error': enquiryForm.controls.PhoneNumber.errors}" type="text" formControlName="PhoneNumber" placeholder="Your Phone Number"
                                 />
-                                <p class="error-msg" *ngIf="enquiryForm.controls.PhoneNumber.errors">{{enquiryForm.controls.PhoneNumber.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('PhoneNumber')">{{ReturnValid('PhoneNumber')}}</p>
                             </div>
                         </div>
                         <div class="control">
                             <label class="controlname">Date</label>
                             <div class="inputcontrol">
-                                <input type="date" name="bday" formControlName="TravelDate" />
-                                <p class="error-msg" *ngIf="enquiryForm.controls.TravelDate.errors">{{enquiryForm.controls.TravelDate.errors.message}}</p>
+                                <input id="Date" type="date" name="bday" formControlName="TravelDate" />
+                                <p class="error-msg" *ngIf="ReturnValid('TravelDate')">{{ReturnValid('TravelDate')}}</p>
                             </div>
                         </div>
                     </div>
@@ -55,40 +55,40 @@
                         <div class="control" *ngIf="IsCabRequest">
                             <label class="controlname">From</label>
                             <div class="inputcontrol">
-                                <input [ngClass]="{'Error': enquiryForm.controls.Cab_FromPlace.errors}" type="text" name="Cab_FromPlace" formControlName="Cab_FromPlace"
+                                <input id="From" [ngClass]="{'Error': enquiryForm.controls.Cab_FromPlace.errors}" type="text" name="Cab_FromPlace" formControlName="Cab_FromPlace"
                                     placeholder="Your Location" />
-                                <p class="error-msg" *ngIf="enquiryForm.controls.Cab_FromPlace.errors">{{enquiryForm.controls.Cab_FromPlace.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('Cab_FromPlace')">{{ReturnValid('Cab_FromPlace')}}</p>
                             </div>
                         </div>
                         <div class="control" *ngIf="IsCabRequest">
                             <label class="controlname">To</label>
                             <div class="inputcontrol">
-                                <input [ngClass]="{'Error': enquiryForm.controls.Cab_ToPlace.errors}" type="text" formControlName="Cab_ToPlace" placeholder="Your Destination"
+                                <input id="To" [ngClass]="{'Error': enquiryForm.controls.Cab_ToPlace.errors}" type="text" formControlName="Cab_ToPlace" placeholder="Your Destination"
                                 />
-                                <p class="error-msg" *ngIf="enquiryForm.controls.Cab_ToPlace.errors">{{enquiryForm.controls.Cab_ToPlace.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('Cab_ToPlace')">{{ReturnValid('Cab_ToPlace')}}</p>
                             </div>
                         </div>
                         <div class="control" *ngIf="!IsCabRequest">
                             <label class="controlname">Number of Days</label>
                             <div class="inputcontrol">
-                                <input [ngClass]="{'Error': enquiryForm.controls.Trip_NumberOfDays.errors}" type="text" formControlName="Trip_NumberOfDays"
+                                <input id="Days" [ngClass]="{'Error': enquiryForm.controls.Trip_NumberOfDays.errors}" type="text" formControlName="Trip_NumberOfDays"
                                     placeholder="Number of days" />
-                                <p class="error-msg" *ngIf="enquiryForm.controls.Trip_NumberOfDays.errors">{{enquiryForm.controls.Trip_NumberOfDays.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('Trip_NumberOfDays')">{{ReturnValid('Trip_NumberOfDays')}}</p>
                             </div>
                         </div>
                         <div class="control" *ngIf="!IsCabRequest">
                             <label class="controlname">Places</label>
                             <div class="inputcontrol">
-                                <input [ngClass]="{'Error': enquiryForm.controls.Trip_Places.errors}" type="text" formControlName="Trip_Places" placeholder="Places"
+                                <input id="Places" [ngClass]="{'Error': enquiryForm.controls.Trip_Places.errors}" type="text" formControlName="Trip_Places" placeholder="Places"
                                 />
-                                <p class="error-msg" *ngIf="enquiryForm.controls.Trip_Places.errors">{{enquiryForm.controls.Trip_Places.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('Trip_Places')">{{ReturnValid('Trip_Places')}}</p>
                             </div>
                         </div>
                         <div class="control">
                             <label class="controlname">Your Taxi</label>
                             <div class="inputcontrol">
 
-                                <select [ngClass]="{'Error': enquiryForm.controls.Vehicle.errors}" type="" id="NONAC" name="CabID" placeholder="" formControlName="Vehicle">
+                                <select id="Taxi" [ngClass]="{'Error': enquiryForm.controls.Vehicle.errors}" type="" id="NONAC" name="CabID" placeholder="" formControlName="Vehicle">
                                     <option value="">-Select-</option>
                                     <option value="Innova">NONAC A</option>
                                     <option value="Swift">NONAC B</option>
@@ -96,7 +96,7 @@
                                     <option value="Audi">NONAC D</option>
                                 </select>
 
-                                <p class="error-msg" *ngIf="enquiryForm.controls.Vehicle.errors">{{enquiryForm.controls.Vehicle.errors.message}}</p>
+                                <p class="error-msg" *ngIf="ReturnValid('Vehicle')">{{ReturnValid('Vehicle')}}</p>
                             </div>
 
                         </div>
@@ -111,3 +111,4 @@
         </div>
     </form>
 </div>
+<div class="loading" *ngIf="!this.APIService.LoadPage">Loading Wait...</div>

@@ -17,7 +17,7 @@ var Vehicle_1 = require('./Vehicle');
 var AboutUs_1 = require('./AboutUs');
 var ContactUs_1 = require('./ContactUs');
 var routes = [
-    { path: '', component: Home_1.HomeComponent },
+    { path: '', redirectTo: '/Home', pathMatch: 'full' },
     { path: 'Home', component: Home_1.HomeComponent },
     { path: 'Cabs', component: Vehicle_1.VehiclesComponent },
     { path: 'AboutUs', component: AboutUs_1.AboutUsComponent },

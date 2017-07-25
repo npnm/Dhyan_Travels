@@ -13,21 +13,55 @@ var modals_1 = require('./modals');
 var forms_1 = require('@angular/forms');
 var Directives_1 = require('../Common/Directives');
 var Constants_1 = require('../Common/Constants');
+var Services_1 = require('../Api/Services');
 var ContactUsComponent = (function () {
-    function ContactUsComponent(fb) {
+    function ContactUsComponent(fb, APIService) {
         this.fb = fb;
+        this.APIService = APIService;
+        this.ValidationMessages = Constants_1.ValidationMessages;
+        this.Submitted = false;
         this.ContactUsText = "Contact Us";
-        this.ContactUsRequest = new modals_1.ContactUsRequest(new modals_1.Contact('', '', ''));
+        this.ReturnValid = function (controlName) {
+            var returnValue = '';
+            if (controlName !== "") {
+                if (this.contactUsForm.controls[controlName].errors !== null) {
+                    if (this.contactUsForm.controls[controlName].errors.message !== undefined) {
+                        return this.contactUsForm.controls[controlName].errors.message;
+                    }
+                    else if (this.contactUsForm.controls[controlName].errors.required === true && this.Submitted) {
+                        return this.ValidationMessages.Messages[controlName + '_Required'];
+                    }
+                    else {
+                        '';
+                    }
+                }
+            }
+        };
+        this.SubmitContactRequest = function (action) {
+            if (action === Constants_1.ApplicationConstants.CustomerAction.SUBMIT) {
+                this.Submitted = true;
+                if (this.contactUsForm.valid) {
+                    this.ContactUsRequest.Customer = new modals_1.Customer(this.contactUsForm.FullName, this.contactUsForm.PhoneNumber, this.contactUsForm.EmailId);
+                    console.log(this.ContactUsRequest);
+                }
+            }
+            else if (action === Constants_1.ApplicationConstants.CustomerAction.CLEAR) {
+                this.buildForm();
+            }
+            return;
+        };
+        this.ContactUsRequest = new modals_1.ContactUsRequest(new modals_1.Customer('', '', ''));
         this.clientInfoTableClass = ["clientInfoTable"];
     }
     ContactUsComponent.prototype.ngOnInit = function () {
         this.buildForm();
     };
     ContactUsComponent.prototype.buildForm = function () {
+        this.Submitted = false;
         this.contactUsForm = this.fb.group({
-            'FullName': [this.ContactUsRequest.Contact.FullName, [Directives_1.validateField(new Constants_1.CustomValidationRules('FullName'), this.contactUsForm)]],
-            'PhoneNumber': [this.ContactUsRequest.Contact.PhoneNumber, [Directives_1.validateField(new Constants_1.CustomValidationRules('PhoneNumber'), this.contactUsForm)]],
-            'EmailId': [this.ContactUsRequest.Contact.EmailId, [Directives_1.validateField(new Constants_1.CustomValidationRules('EmailId'), this.contactUsForm)]]
+            'FullName': [this.ContactUsRequest.Customer.FullName, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('FullName'), this.contactUsForm)]],
+            'PhoneNumber': [this.ContactUsRequest.Customer.PhoneNumber, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('PhoneNumber'), this.contactUsForm)]],
+            'EmailId': [this.ContactUsRequest.Customer.EmailId, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('EmailId'), this.contactUsForm)]]
         });
     };
     ContactUsComponent.prototype.NavigateToFacebook = function () {
@@ -37,7 +71,7 @@ var ContactUsComponent = (function () {
         core_1.Component({
             templateUrl: 'Views/ContactUs.html'
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, Services_1.APIService])
     ], ContactUsComponent);
     return ContactUsComponent;
 }());

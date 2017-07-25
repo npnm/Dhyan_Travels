@@ -1,4 +1,4 @@
-<div class="page-content">
+<div class="page-content" *ngIf="this.APIService.LoadPage">
     <div class="cabsList">
         <h1>Pick your cab</h1>
         <div class="cabs-repeat" *ngFor="let cab of cabObject">

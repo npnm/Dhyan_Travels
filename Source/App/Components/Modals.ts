@@ -1,25 +1,8 @@
 class Customer {
     FullName: string;
     PhoneNumber: string;
-    FromPlace: string;
-    ToPlace: string;
-    NoOfPassengers: string;
-    Type: string;
-    constructor(FullName: string = '', PhoneNumber: string = '', FromPlace: string = '', ToPlace: string = '', NoOfPassengers: string = '', Type: string = '') {
-        this.FullName = FullName;
-        this.PhoneNumber = PhoneNumber;
-        this.FromPlace = FromPlace;
-        this.ToPlace = ToPlace;
-        this.NoOfPassengers = NoOfPassengers;
-        this.Type = Type;
-    }
-
-}
-class Contact {
-    FullName: string;
-    PhoneNumber: string;
     EmailId: string;
-    constructor(FullName: string = '', PhoneNumber: string = '', EmailId: string = '' ) {
+    constructor(FullName: string = '', PhoneNumber: string = '', EmailId: string = '') {
         this.FullName = FullName;
         this.PhoneNumber = PhoneNumber;
         this.EmailId = EmailId;
@@ -47,22 +30,25 @@ class Vehicle {
 
 
 class EnquiryRequest {
-    Customer: Customer;    
+    Customer: Customer;
     Vehicle: Vehicle;
-    TravelDate:string;
+    TravelDate: string;
     Cab_FromPlace: string;
     Cab_ToPlace: string;
     Trip_NumberOfDays: string;
     Trip_Places: string;
 
-    constructor(tempCustomer: Customer, FromPlace: string = '', ToPlace: string = '', tempCab: Vehicle = null) {
+    constructor(tempCustomer: Customer, TravelDate: string = '', Cab_ToPlace: string = '', Cab_FromPlace: string = '', Trip_NumberOfDays: string = '', Trip_Places: string = '', tempCab: Vehicle = null) {
 
-        this.Cab_FromPlace = FromPlace;
-        this.Cab_ToPlace = ToPlace;
+        this.Cab_FromPlace = Cab_FromPlace;
+        this.Cab_ToPlace = Cab_ToPlace;
+        this.TravelDate = TravelDate;
+        this.Trip_NumberOfDays = Trip_NumberOfDays;
+        this.Trip_Places = Trip_Places;
         if (tempCustomer === null) {
             tempCustomer = new Customer('', '', '');
         }
-        this.Customer = new Customer(tempCustomer.FullName, tempCustomer.PhoneNumber)
+        this.Customer = new Customer(tempCustomer.FullName, tempCustomer.PhoneNumber, tempCustomer.EmailId)
         if (tempCab === null) {
             tempCab = new Vehicle('', '', 0, 0);
         }
@@ -71,17 +57,13 @@ class EnquiryRequest {
 }
 
 class ContactUsRequest {
-   Contact: Contact;
-   
-    constructor(tempContact: Contact, ) {
-
-        // this.FromPlace = FromPlace;
-        // this.ToPlace = ToPlace;
+    Customer: Customer;
+    constructor(tempContact: Customer) {
         if (tempContact === null) {
-            tempContact = new Contact('', '', '');
+            tempContact = new Customer('', '', '');
         }
-        this.Contact = new Contact(tempContact.FullName, tempContact.PhoneNumber, tempContact.EmailId)
-        
+        this.Customer = new Customer(tempContact.FullName, tempContact.PhoneNumber, tempContact.EmailId)
+
     }
 }
-export { Customer,Contact, Vehicle, EnquiryRequest, ContactUsRequest };
+export { Customer, Vehicle, EnquiryRequest, ContactUsRequest };

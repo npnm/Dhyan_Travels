@@ -9,8 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var Services_1 = require('../Api/Services');
 var AboutUsComponent = (function () {
-    function AboutUsComponent() {
+    function AboutUsComponent(APIService) {
+        this.APIService = APIService;
         this.aboutUsText = "About Us";
         this.aboutUsDescription = "Payana is a new application for transportation, integrates city transportation for customers and driver partners onto a mobile technology platform. As one of India's fastest growing companies we ensure convenient, transparent and quick service fulfilment using technology to make transportation hassle free for everyone.Payana's offerings on its platform ranges from affordable AC cabs to the superior luxury offering as well as localized offerings like the ubiquitous Auto-rickshaws to Shuttle buses for daily commute. Using the Payana mobile app, users across 102 cities can conveniently book from over 450,000 vehicles available to them.We�ve empowered hundreds of thousands of driver-partners as entrepreneurs, by building an ecosystem encompassing financing institutions, car manufacturers, service providers etc. for drivers to grow professionally and personally as well as a consistent earning opportunity for them on the Payana platform.";
     }
@@ -21,7 +23,7 @@ var AboutUsComponent = (function () {
         core_1.Component({
             templateUrl: 'Views/AboutUs.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [Services_1.APIService])
     ], AboutUsComponent);
     return AboutUsComponent;
 }());

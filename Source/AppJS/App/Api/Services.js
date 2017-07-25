@@ -16,7 +16,8 @@ require('rxjs/add/operator/map');
 var APIService = (function () {
     function APIService(http) {
         this.http = http;
-        this.apiURL = 'http://localhost:8082';
+        this.apiURL = 'http://localhost:8000';
+        this.LoadPage = false;
         this.headers = new http_1.Headers({
             'Content-Type': 'application/x-www-form-urlencoded'
         });
@@ -27,8 +28,8 @@ var APIService = (function () {
     };
     APIService.prototype.NotifyCustomer = function (req) {
         // return this.http.post(this.apiURL + '/NotifyCustomer', req).map(this.handleSuccess)
-        return this.http.post(this.apiURL + '/NotifyCustomer', { 'req': 'test' }, { headers: this.headers }).map(this.handleSuccess)
-            .catch(this.handleError);
+        return this.http.post(this.apiURL + '/NotifyCustomer', req, { headers: this.headers }).map(function (response) { return response.json(); });
+        // .catch(this.handleError)
     };
     APIService.prototype.handleSuccess = function (res) {
         // In a real world app, you might use a remote logging infrastructure        

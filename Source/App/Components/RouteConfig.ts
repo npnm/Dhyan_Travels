@@ -8,7 +8,7 @@ import { AboutUsComponent } from './AboutUs';
 import { ContactUsComponent } from './ContactUs';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', redirectTo: '/Home', pathMatch: 'full' },
     { path: 'Home', component: HomeComponent },
     { path: 'Cabs', component: VehiclesComponent },
     { path: 'AboutUs', component: AboutUsComponent },

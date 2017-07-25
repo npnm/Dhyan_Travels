@@ -13,54 +13,82 @@ var Modals_1 = require('./Modals');
 var forms_1 = require('@angular/forms');
 var Directives_1 = require('../Common/Directives');
 var Constants_1 = require('../Common/Constants');
+var Services_1 = require('../Api/Services');
 var HomeComponent = (function () {
-    function HomeComponent(formBuilder) {
+    function HomeComponent(formBuilder, APIService) {
         this.formBuilder = formBuilder;
+        this.APIService = APIService;
         this.IsCabRequest = true;
-        this.createForm = function () {
-            this.enquiryForm = this.formBuilder.group({
-                'FullName': [this.EnquiryRequest.Customer.FullName, [Directives_1.validateField(new Constants_1.CustomValidationRules('FullName'), this.enquiryForm)]],
-                'PhoneNumber': [this.EnquiryRequest.Customer.PhoneNumber, [Directives_1.validateField(new Constants_1.CustomValidationRules('PhoneNumber'), this.enquiryForm)]],
-                'TravelDate': [this.EnquiryRequest.TravelDate, [Directives_1.validateField(new Constants_1.CustomValidationRules('TravelDate'), this.enquiryForm)]],
-                'Cab_FromPlace': [this.EnquiryRequest.Cab_FromPlace, [Directives_1.validateField(new Constants_1.CustomValidationRules('Cab_FromPlace'), this.enquiryForm)]],
-                'Cab_ToPlace': [this.EnquiryRequest.Cab_ToPlace, [Directives_1.validateField(new Constants_1.CustomValidationRules('Cab_ToPlace'), this.enquiryForm)]],
-                'Trip_NumberOfDays': [this.EnquiryRequest.Trip_NumberOfDays, [Directives_1.validateField(new Constants_1.CustomValidationRules('Trip_NumberOfDays'), this.enquiryForm)]],
-                'Trip_Places': [this.EnquiryRequest.Trip_Places, [Directives_1.validateField(new Constants_1.CustomValidationRules('Trip_Places'), this.enquiryForm)]],
-                'Vehicle': [this.EnquiryRequest.Vehicle.ID, [Directives_1.validateField(new Constants_1.CustomValidationRules('Vehicle'), this.enquiryForm)]]
-            });
-        };
+        this.Submitted = false;
+        this.ValidationMessages = Constants_1.ValidationMessages;
         this.ToggleService = function (requestType) {
-            if (requestType === Constants_1.ApplicationConstants.RequestType.CAB) {
+            if (requestType === Constants_1.ApplicationConstants.RequestType.CAB && !this.IsCabRequest) {
                 this.IsCabRequest = true;
+                this.buildForm();
             }
-            else {
+            else if (requestType === Constants_1.ApplicationConstants.RequestType.TRIP && this.IsCabRequest) {
                 this.IsCabRequest = false;
+                this.buildForm();
             }
-            this.createForm();
+        };
+        this.ReturnValid = function (controlName) {
+            var returnValue = '';
+            if (controlName !== "") {
+                if (this.enquiryForm.controls[controlName].errors !== null) {
+                    if (this.enquiryForm.controls[controlName].errors.message !== undefined) {
+                        return this.enquiryForm.controls[controlName].errors.message;
+                    }
+                    else if (this.enquiryForm.controls[controlName].errors.required === true && this.Submitted) {
+                        return this.ValidationMessages.Messages[controlName + '_Required'];
+                    }
+                    else {
+                        '';
+                    }
+                }
+            }
         };
         this.SubmitEnquiryRequest = function (action) {
+            var _this = this;
             if (action === Constants_1.ApplicationConstants.CustomerAction.SUBMIT) {
-                this.EnquiryRequest = this.enquiryForm.value;
+                this.Submitted = true;
+                if (this.enquiryForm.valid) {
+                    this.EnquiryRequest = this.enquiryForm.value;
+                    this.EnquiryRequest.Customer = new Modals_1.Customer(this.EnquiryRequest.FullName, this.EnquiryRequest.PhoneNumber);
+                    console.log(this.EnquiryRequest);
+                    this.APIService.NotifyCustomer(this.EnquiryRequest).subscribe(function (data) {
+                        _this.Response = data;
+                        console.log("NotifyCustomer: Response ", data);
+                    });
+                }
             }
             else if (action === Constants_1.ApplicationConstants.CustomerAction.CLEAR) {
-                this.createForm();
+                this.buildForm();
             }
-            console.log(this.EnquiryRequest);
             return;
         };
-        this.EnquiryRequest = new Modals_1.EnquiryRequest(new Modals_1.Customer('', '', '', '', '', ''), '', '', new Modals_1.Vehicle('', '', 0, 0, '', ''));
+        this.EnquiryRequest = new Modals_1.EnquiryRequest(new Modals_1.Customer('', '', ''), '', '', '', '', '', new Modals_1.Vehicle('', '', 0, 0, '', ''));
     }
     HomeComponent.prototype.ngOnInit = function () {
         this.buildForm();
     };
     HomeComponent.prototype.buildForm = function () {
-        this.createForm();
+        this.Submitted = false;
+        this.enquiryForm = this.formBuilder.group({
+            'FullName': [this.EnquiryRequest.Customer.FullName, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('FullName'), this.enquiryForm)]],
+            'PhoneNumber': [this.EnquiryRequest.Customer.PhoneNumber, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('PhoneNumber'), this.enquiryForm)]],
+            'TravelDate': [this.EnquiryRequest.TravelDate, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('TravelDate'), this.enquiryForm)]],
+            'Cab_FromPlace': [this.EnquiryRequest.Cab_FromPlace, [(this.IsCabRequest) ? forms_1.Validators.required : forms_1.Validators.nullValidator, Directives_1.validateField(new Constants_1.CustomValidationRules('Cab_FromPlace'), this.enquiryForm)]],
+            'Cab_ToPlace': [this.EnquiryRequest.Cab_ToPlace, [(this.IsCabRequest) ? forms_1.Validators.required : forms_1.Validators.nullValidator, Directives_1.validateField(new Constants_1.CustomValidationRules('Cab_ToPlace'), this.enquiryForm)]],
+            'Trip_NumberOfDays': [this.EnquiryRequest.Trip_NumberOfDays, [(!this.IsCabRequest) ? forms_1.Validators.required : forms_1.Validators.nullValidator, Directives_1.validateField(new Constants_1.CustomValidationRules('Trip_NumberOfDays'), this.enquiryForm)]],
+            'Trip_Places': [this.EnquiryRequest.Trip_Places, [(!this.IsCabRequest) ? forms_1.Validators.required : forms_1.Validators.nullValidator, Directives_1.validateField(new Constants_1.CustomValidationRules('Trip_Places'), this.enquiryForm)]],
+            'Vehicle': [this.EnquiryRequest.Vehicle.ID, [forms_1.Validators.required, Directives_1.validateField(new Constants_1.CustomValidationRules('Vehicle'), this.enquiryForm)]]
+        });
     };
     HomeComponent = __decorate([
         core_1.Component({
             templateUrl: 'Views/Home.html'
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, Services_1.APIService])
     ], HomeComponent);
     return HomeComponent;
 }());

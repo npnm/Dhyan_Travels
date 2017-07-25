@@ -67,7 +67,7 @@ export function validateField(validationObject: CustomValidationRules, param: Fo
                     var givenDate = new Date(controlValues);
                     var currentDate = new Date();
                     if (givenDate <= currentDate) {
-                        return { 'message': ValidationMessages.Messages.TravelDate_Required }
+                        return { 'message': ValidationMessages.Messages.TravelDate_Valid }
                     }
                     break;
                 case 'Cab_FromPlace':

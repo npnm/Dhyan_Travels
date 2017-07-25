@@ -6,18 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="shortcut icon" href="contents/Img/meta.png"/>
     <!--Style Sheet-->
-      <link rel="stylesheet" href="contents/css/Dhyan Travels.css">
+      <link rel="stylesheet" href="contents/css/Dhyan_Travels.css">
     <!-- 1. Load libraries -->
     <!--Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
 
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/zone.js/dist/zone.min.js"></script>
+    <script src="node_modules/systemjs/dist/system.js"></script>
 
-    <script src="systemjs.config.js"></script>
-    <script>
+    <!--SystemJS setup for Dev-->
+     <script src="systemjs.config.js"></script> 
+     <script>
         System.import('AppJS/Main.js').catch(function (err) { console.error(err); });
     </script>
+    <!--SystemJS setup for Production-->
+    <!-- <script src="systemjs.config.prod.js"></script> 
+    <script>
+        System.import('AppJS/Main.prod.js').catch(function (err) { console.error(err); });
+    </script> -->
 </head>
 
 <body scroll="no">

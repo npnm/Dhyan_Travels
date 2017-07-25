@@ -11,19 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
-var routeConfig_1 = require('./components/routeConfig');
-var app_1 = require('./app');
-var services_1 = require('./api/services');
+var RouteConfig_1 = require('./Components/RouteConfig');
+var App_1 = require('./App');
+var Services_1 = require('./Api/Services');
 var http_1 = require('@angular/http');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [http_1.HttpModule, platform_browser_1.BrowserModule, forms_1.ReactiveFormsModule, routeConfig_1.AppRouteConfig],
-            declarations: [app_1.AppComponent, routeConfig_1.AppRouteComponents],
-            bootstrap: [app_1.AppComponent],
-            providers: [services_1.APIService]
+            imports: [http_1.HttpModule, platform_browser_1.BrowserModule, forms_1.ReactiveFormsModule, RouteConfig_1.AppRouteConfig],
+            declarations: [App_1.AppComponent, RouteConfig_1.AppRouteComponents],
+            bootstrap: [App_1.AppComponent],
+            providers: [Services_1.APIService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
