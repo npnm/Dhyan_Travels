@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class APIService {
     private apiURL = 'http://localhost:8000';
-    public PageContent: object;
-    private LoadPage: boolean = false;
+    public PageContent: any;
+    public LoadPage: boolean = false;
     private headers = new Headers({
         'Content-Type': 'application/x-www-form-urlencoded'
     });

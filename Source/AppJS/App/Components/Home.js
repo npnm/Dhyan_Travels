@@ -48,17 +48,12 @@ var HomeComponent = (function () {
             }
         };
         this.SubmitEnquiryRequest = function (action) {
-            var _this = this;
             if (action === Constants_1.ApplicationConstants.CustomerAction.SUBMIT) {
                 this.Submitted = true;
                 if (this.enquiryForm.valid) {
                     this.EnquiryRequest = this.enquiryForm.value;
                     this.EnquiryRequest.Customer = new Modals_1.Customer(this.EnquiryRequest.FullName, this.EnquiryRequest.PhoneNumber);
                     console.log(this.EnquiryRequest);
-                    this.APIService.NotifyCustomer(this.EnquiryRequest).subscribe(function (data) {
-                        _this.Response = data;
-                        console.log("NotifyCustomer: Response ", data);
-                    });
                 }
             }
             else if (action === Constants_1.ApplicationConstants.CustomerAction.CLEAR) {

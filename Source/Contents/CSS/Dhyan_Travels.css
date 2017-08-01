@@ -101,21 +101,36 @@ button:hover {
 
 .home {
     position: relative;
-    height: 80%
+    height: 80%;
+    overflow: hidden;
 }
 
-.homeimageone {
+.home .homeimageone {
     width: 50%;
     height: 100%;
     display: inline-block;
 }
 
-.homeimagetwo {
+.home .homeimagetwo {
     width: 50%;
     height: 100%;
     float: right;
 }
-
+.home .homeimageone .image-text h1,.home .homeimageone .image-text p{
+text-align: left;
+}
+.home .homeimagetwo .image-text h1,.home .homeimagetwo .image-text p{
+text-align: right;
+}
+.home .image-text
+{
+    transform: translateY(100px);
+    transition: 1s;
+}
+.home .image-text:hover
+{
+  transform: translateY(-50px);
+}
 .home img {
     max-width: 100%;
     animation: imgopacity 0.5s linear;

@@ -15,8 +15,8 @@ export class HomeComponent {
     public IsCabRequest: boolean = true;
     private Submitted: boolean = false;
     private ValidationMessages = ValidationMessages;
-    private PageContent: object;
-    private Response: object;
+    private PageContent: any;
+    private Response: any;
     constructor(private formBuilder: FormBuilder, private APIService: APIService) {
         this.EnquiryRequest = new EnquiryRequest(new Customer('', '', ''), '', '', '', '', '', new Vehicle('', '', 0, 0, '', ''));
     }
@@ -75,10 +75,10 @@ export class HomeComponent {
                 this.EnquiryRequest = this.enquiryForm.value;
                 this.EnquiryRequest.Customer = new Customer(this.EnquiryRequest.FullName, this.EnquiryRequest.PhoneNumber);
                 console.log(this.EnquiryRequest);
-                this.APIService.NotifyCustomer(this.EnquiryRequest).subscribe(data => {
-                    this.Response = data;
-                    console.log("NotifyCustomer: Response ", data);
-                });
+                // this.APIService.NotifyCustomer(this.EnquiryRequest).subscribe(data => {
+                //     this.Response = data;
+                //     console.log("NotifyCustomer: Response ", data);
+                // });
 
             }
         }
