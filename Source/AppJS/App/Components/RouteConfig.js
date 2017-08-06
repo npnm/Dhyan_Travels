@@ -16,6 +16,7 @@ var Home_1 = require('./Home');
 var Vehicle_1 = require('./Vehicle');
 var AboutUs_1 = require('./AboutUs');
 var ContactUs_1 = require('./ContactUs');
+var Carousel_1 = require('./Carousel');
 var routes = [
     { path: '', redirectTo: '/Home', pathMatch: 'full' },
     { path: 'Home', component: Home_1.HomeComponent },
@@ -38,5 +39,12 @@ var AppRouteConfig = (function () {
     return AppRouteConfig;
 }());
 exports.AppRouteConfig = AppRouteConfig;
-exports.AppRouteComponents = [MenuItems_1.MenuItemsComponent, Footer_1.FooterComponent, Home_1.HomeComponent, Vehicle_1.VehiclesComponent, AboutUs_1.AboutUsComponent, ContactUs_1.ContactUsComponent];
+exports.AppRouteComponents = [
+    MenuItems_1.MenuItemsComponent,
+    Footer_1.FooterComponent,
+    Home_1.HomeComponent,
+    Vehicle_1.VehiclesComponent,
+    AboutUs_1.AboutUsComponent,
+    ContactUs_1.ContactUsComponent,
+    Carousel_1.Carousel];
 //# sourceMappingURL=RouteConfig.js.map

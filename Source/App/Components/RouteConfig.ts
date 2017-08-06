@@ -6,6 +6,7 @@ import { HomeComponent } from './Home';
 import { VehiclesComponent } from './Vehicle';
 import { AboutUsComponent } from './AboutUs';
 import { ContactUsComponent } from './ContactUs';
+import {Carousel} from './Carousel';
 
 const routes: Routes = [
     { path: '', redirectTo: '/Home', pathMatch: 'full' },
@@ -21,6 +22,13 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class AppRouteConfig { }
-export const AppRouteComponents = [MenuItemsComponent, FooterComponent, HomeComponent, VehiclesComponent, AboutUsComponent, ContactUsComponent];
+export const AppRouteComponents = [
+    MenuItemsComponent, 
+    FooterComponent, 
+    HomeComponent, 
+    VehiclesComponent, 
+    AboutUsComponent, 
+    ContactUsComponent,
+    Carousel];
 
 

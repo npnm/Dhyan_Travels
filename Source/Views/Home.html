@@ -7,21 +7,7 @@
             </div>
         </div>
         <div class="home">
-            <div class="homeimageone">
-                <img id="cab" src="../Contents/Img/car/1.jpg">
-                <div class="image-text left">
-                    <h1>My Car</h1>
-                    <p> This is regarding image 10</p>
-                </div>
-            </div>
-
-            <div class="homeimagetwo">
-                <img id="tour" src="../Contents/Img/tour/1.jpg">
-                <div class="image-text right">
-                     <h1>My Car</h1>
-                    <p> This is regarding image 20</p>
-                </div>
-            </div>
+            <carousel></carousel>
             <div class="enquiryform" novalidate>
                 <div class="enquirytype">
                     <div [ngClass]="{'select':IsCabRequest}" (click)="ToggleService('CAB')">Taxi Service</div>

@@ -105,21 +105,53 @@ button:hover {
     overflow: hidden;
 }
 
-.home .homeimageone {
+.home .cabimages {
     width: 50%;
     height: 100%;
-    display: inline-block;
+    float: left;
+    padding: 2px 1px;
 }
 
-.home .homeimagetwo {
+.home .tourimages {
     width: 50%;
     height: 100%;
     float: right;
+     padding: 2px 1px;
 }
-.home .homeimageone .image-text h1,.home .homeimageone .image-text p{
+.cabimages .img-display,
+    .tourimages .img-display{
+     transition: 0.5s;        
+        display: none;
+    }
+.cabimages .active, .tourimages .active {
+        display: block;
+    }
+.carousel-indicators .active{
+         display: inline-block;
+         background: #ffd205;
+    }
+    /*Carousel Component*/
+.cabimages .carousel-indicators{
+    text-align: center;
+}
+.tourimages .carousel-indicators{
+    text-align: center;
+}
+
+.carousel-indicators li{
+ display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 1px;
+    cursor: pointer;
+    background-color:transparent;
+    border: 1px solid #ffd205;
+    border-radius: 10px;
+}
+.home .cabimages .image-text h1,.home .cabimages .image-text p{
 text-align: left;
 }
-.home .homeimagetwo .image-text h1,.home .homeimagetwo .image-text p{
+.home .tourimages .image-text h1,.home .tourimages .image-text p{
 text-align: right;
 }
 .home .image-text
@@ -658,6 +690,7 @@ footer .footer-content a:hover {
     text-decoration: underline;
 }
 
+/*Font Styling*/
 @font-face {
     font-family: 'ngh-dt';
     src: url('../Fonts/ngh-dt.eot?6fp3ju');
@@ -859,8 +892,8 @@ footer .footer-content a:hover {
         font-size: 14px;
         line-height: 30px;
     }
-    .homeimageone,
-    .homeimagetwo {
+    .cabimages,
+    .tourimages {
         display: none;
     }
     .enquiryform {

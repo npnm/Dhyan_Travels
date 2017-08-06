@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validateField } from '../Common/Directives';
 import { CustomValidationRules, ValidationMessages, ApplicationConstants } from '../Common/Constants';
 import { APIService } from '../Api/Services';
+import {Carousel} from './Carousel';
 @Component(
     {
         templateUrl: 'Views/Home.html'
