@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { ApplicationConstants } from '../Common/Constants';
+
 
 @Component({
     selector: 'carousel',
@@ -7,7 +8,7 @@ import { ApplicationConstants } from '../Common/Constants';
        <div class="cabimages"  (mouseenter)="PauseAndDisplay(cabReqestType,'pause')" (mouseleave)="PauseAndDisplay(cabReqestType,'play')">     
             <div class="img-display" [ngClass]="{'active':cabimg.active}"   *ngFor="let cabimg of cab_slides">
                 <img id="cab" [src]="cabimg.ImgURL">
-                <div class="image-text left">
+                <div class="image-text left" [ngClass]="{'animatetext':showText_CAB,'animatetextreverse':!showText_CAB}">
                     <h1>{{cabimg.HeaderText}}</h1>
                     <p>{{cabimg.DescriptionText}}</p>
                 </div>
@@ -19,7 +20,7 @@ import { ApplicationConstants } from '../Common/Constants';
         <div class="tourimages"  (mouseenter)="PauseAndDisplay(tripReqestType,'pause')" (mouseleave)="PauseAndDisplay(tripReqestType,'play')">
             <div class="img-display"  [ngClass]="{'active':tourimg.active}" *ngFor="let tourimg of tour_slides">
                 <img id="tour" [src]="tourimg.ImgURL">
-                <div class="image-text right">
+                <div class="image-text right" [ngClass]="{'animatetext':showText_TRIP,'animatetextreverse':!showText_TRIP}">
                      <h1>{{tourimg.HeaderText}}</h1>
                     <p>{{tourimg.DescriptionText}}</p>
                 </div>
@@ -38,6 +39,10 @@ export class Carousel {
     private timerId_TRIP: any;
     private cabReqestType = ApplicationConstants.RequestType.CAB;
     private tripReqestType = ApplicationConstants.RequestType.TRIP;
+
+    // @HostBinding('class.animate') 
+    private showText_CAB: boolean = false;
+    private showText_TRIP: boolean = false;
     constructor() {
         for (var count = 1; count <= 3; count++) {
             this.cab_slides.push({
@@ -122,12 +127,25 @@ export class Carousel {
         }
     }
 
-    PauseAndDisplay(reqestType: string, action: string) {
+    PauseAndDisplay(requestType: string, action: string) {
         if (action === 'pause') {
-            this.clearTimer(reqestType);
+            this.clearTimer(requestType);
+            if (requestType === 'CAB') {
+                this.showText_CAB = true;
+            }
+            else {
+                this.showText_TRIP = true;
+            }
         }
+
         else if (action === 'play') {
-            this.resetTimer(reqestType);
+            this.resetTimer(requestType);
+            if (requestType === 'CAB') {
+                this['showText_' + requestType] = false;
+            }
+            else {
+                this.showText_TRIP = false;
+            }
         }
     }
 
@@ -142,6 +160,7 @@ export class Carousel {
             if (this.timerId_TRIP) {
                 clearInterval(this.timerId_TRIP);
             }
+
         }
     }
 

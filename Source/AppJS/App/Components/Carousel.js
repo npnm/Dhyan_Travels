@@ -16,6 +16,9 @@ var Carousel = (function () {
         this.tour_slides = [];
         this.cabReqestType = Constants_1.ApplicationConstants.RequestType.CAB;
         this.tripReqestType = Constants_1.ApplicationConstants.RequestType.TRIP;
+        // @HostBinding('class.animate') 
+        this.showText_CAB = false;
+        this.showText_TRIP = false;
         for (var count = 1; count <= 3; count++) {
             this.cab_slides.push({
                 HeaderText: 'Cab_' + count,
@@ -97,12 +100,24 @@ var Carousel = (function () {
             }
         }
     };
-    Carousel.prototype.PauseAndDisplay = function (reqestType, action) {
+    Carousel.prototype.PauseAndDisplay = function (requestType, action) {
         if (action === 'pause') {
-            this.clearTimer(reqestType);
+            this.clearTimer(requestType);
+            if (requestType === 'CAB') {
+                this.showText_CAB = true;
+            }
+            else {
+                this.showText_TRIP = true;
+            }
         }
         else if (action === 'play') {
-            this.resetTimer(reqestType);
+            this.resetTimer(requestType);
+            if (requestType === 'CAB') {
+                this['showText_' + requestType] = false;
+            }
+            else {
+                this.showText_TRIP = false;
+            }
         }
     };
     Carousel.prototype.clearTimer = function (reqestType) {
@@ -120,7 +135,7 @@ var Carousel = (function () {
     Carousel = __decorate([
         core_1.Component({
             selector: 'carousel',
-            template: "\n       <div class=\"cabimages\"  (mouseenter)=\"PauseAndDisplay(cabReqestType,'pause')\" (mouseleave)=\"PauseAndDisplay(cabReqestType,'play')\">     \n            <div class=\"img-display\" [ngClass]=\"{'active':cabimg.active}\"   *ngFor=\"let cabimg of cab_slides\">\n                <img id=\"cab\" [src]=\"cabimg.ImgURL\">\n                <div class=\"image-text left\">\n                    <h1>{{cabimg.HeaderText}}</h1>\n                    <p>{{cabimg.DescriptionText}}</p>\n                </div>\n            </div>\n            <ol class=\"carousel-indicators\">\n            <li *ngFor=\"let cabimg of cab_slides\" (click)=\"selectImage(cabReqestType,true,cabimg)\" [ngClass]=\"{'active':cabimg.active}\"></li>\n            </ol>\n        </div>\n        <div class=\"tourimages\"  (mouseenter)=\"PauseAndDisplay(tripReqestType,'pause')\" (mouseleave)=\"PauseAndDisplay(tripReqestType,'play')\">\n            <div class=\"img-display\"  [ngClass]=\"{'active':tourimg.active}\" *ngFor=\"let tourimg of tour_slides\">\n                <img id=\"tour\" [src]=\"tourimg.ImgURL\">\n                <div class=\"image-text right\">\n                     <h1>{{tourimg.HeaderText}}</h1>\n                    <p>{{tourimg.DescriptionText}}</p>\n                </div>\n            </div>\n            <ol class=\"carousel-indicators\">\n            <li *ngFor=\"let tourimg of tour_slides\" (click)=\"selectImage(tripReqestType,true,tourimg)\" [ngClass]=\"{'active':tourimg.active}\"></li>\n            </ol>\n        </div>\n          \n    "
+            template: "\n       <div class=\"cabimages\"  (mouseenter)=\"PauseAndDisplay(cabReqestType,'pause')\" (mouseleave)=\"PauseAndDisplay(cabReqestType,'play')\">     \n            <div class=\"img-display\" [ngClass]=\"{'active':cabimg.active}\"   *ngFor=\"let cabimg of cab_slides\">\n                <img id=\"cab\" [src]=\"cabimg.ImgURL\">\n                <div class=\"image-text left\" [ngClass]=\"{'animatetext':showText_CAB,'animatetextreverse':!showText_CAB}\">\n                    <h1>{{cabimg.HeaderText}}</h1>\n                    <p>{{cabimg.DescriptionText}}</p>\n                </div>\n            </div>\n            <ol class=\"carousel-indicators\">\n            <li *ngFor=\"let cabimg of cab_slides\" (click)=\"selectImage(cabReqestType,true,cabimg)\" [ngClass]=\"{'active':cabimg.active}\"></li>\n            </ol>\n        </div>\n        <div class=\"tourimages\"  (mouseenter)=\"PauseAndDisplay(tripReqestType,'pause')\" (mouseleave)=\"PauseAndDisplay(tripReqestType,'play')\">\n            <div class=\"img-display\"  [ngClass]=\"{'active':tourimg.active}\" *ngFor=\"let tourimg of tour_slides\">\n                <img id=\"tour\" [src]=\"tourimg.ImgURL\">\n                <div class=\"image-text right\" [ngClass]=\"{'animatetext':showText_TRIP,'animatetextreverse':!showText_TRIP}\">\n                     <h1>{{tourimg.HeaderText}}</h1>\n                    <p>{{tourimg.DescriptionText}}</p>\n                </div>\n            </div>\n            <ol class=\"carousel-indicators\">\n            <li *ngFor=\"let tourimg of tour_slides\" (click)=\"selectImage(tripReqestType,true,tourimg)\" [ngClass]=\"{'active':tourimg.active}\"></li>\n            </ol>\n        </div>\n          \n    "
         }), 
         __metadata('design:paramtypes', [])
     ], Carousel);
