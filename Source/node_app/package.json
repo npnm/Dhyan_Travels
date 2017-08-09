@@ -4,7 +4,7 @@
   "description": "Dhyan Travels node app",
   "repository": "https://github.com/HemanthNGovindan/Dhyan_Travels",
   "scripts": {
-    "start": "node services_api.js",
+    "start": "node services_api.js"
   },
   "author": "Hemanth",
   "license": "Apache-2.0",
