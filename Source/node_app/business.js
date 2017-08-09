@@ -25,7 +25,7 @@ function ReadApplicationContentFile() {
     Response.Content = {}
     var promiseObject = new Promise(function (resolve, reject) {
         try {
-            var data = fs.readFileSync('Contents/StaticContents/ApplicationPageContent.xml');
+            var data = fs.readFileSync('/content/ApplicationPageContent.xml');
             parser.parseString(data, function (err, result) {
                 if (err) {
                     reject(err);
