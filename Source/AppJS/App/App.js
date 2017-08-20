@@ -14,6 +14,7 @@ var AppComponent = (function () {
     function AppComponent(APIService) {
         var _this = this;
         this.APIService = APIService;
+        this.APIService.LoadPage = true;
         if (this.APIService.PageContent === undefined) {
             this.APIService.FetchSiteContents().subscribe(function (data) {
                 _this.APIService.PageContent = data;

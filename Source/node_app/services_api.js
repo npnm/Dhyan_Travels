@@ -32,6 +32,6 @@ app.get('/', function (req, res) {
 app.get('/ReadApplicationContentFile', function (req, res) { business.readApplicationContentFileCallback(req, res) });
 app.post('/NotifyCustomer', function (req, res) { business.notifyCustomerCallback(req, res) });
 
-app.listen(8000, function () {
-    console.log('Example app listening on port 8000!')
+app.listen(8080, function () {
+    console.log('Example app listening on port 8080!')
 })

@@ -10,11 +10,11 @@ var ValidationExpression = (function () {
         'PhoneNumber_Valid': /^\d{10}$/,
         // 'PhoneNumber_Valid':/(\d{3})\-?(\d{3})\-?(\d{4}),'$1-$2-$3'/,
         //From
-        'Cab_FromPlace_Valid': /^[a-zA-Z ]+$/,
+        'Cab_FromPlace_Valid': /^[a-zA-Z]+$/,
         //To
-        'Cab_ToPlace_Valid': /^[a-zA-Z ]+$/,
+        'Cab_ToPlace_Valid': /^[a-zA-Z]+$/,
         //Number of Days
-        'Trip_NumberOfDays_Valid': /\d{2}/,
+        'Trip_NumberOfDays_Valid': /\d{1,2}/,
         'Trip_Places': /^[a-zA-Z0-9]+$/,
         'EmailId_Valid': /^[a-zA-Z0-9._-]+@([a-zA-Z0-9.-]+\.)+[a-zA-Z0-9.-]{2,4}$/
     };
